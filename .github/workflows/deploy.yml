@@ -23,4 +23,4 @@ jobs:
         server-dir: ${{ secrets.FTP_SERVER_DIR }}
         local-dir: ./
 
-# finished?
+# finished
