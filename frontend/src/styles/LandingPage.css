@@ -1,0 +1,97 @@
+*{
+    font-family: "Lucida Console";
+    width: 100;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #16142c;
+}
+
+.logo{
+    margin-left: 50px;
+    margin-right: 20px;
+    width: 50px;
+}
+
+.buttons{
+    display: flex;
+    align-items: center;    
+    gap: 20px;
+    float: right;
+    margin-left: 35%;
+}
+
+.landing-header{
+    background-color: orange;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    background-image: linear-gradient(to right,#f9c94d, #d98139, #ba4229, #9c1927, #7d0f36, #5e073e, #3e0238);
+}
+
+.orange{
+    color: #BA4229
+}
+.red{
+    color: #9c1927
+}
+.purple {
+    color: #771296
+}
+.rest {
+    letter-spacing: 5px;
+    font-size: 40px;
+    margin-left: 5px;
+    color: #771296;
+}
+
+.rest1{
+    font-size: 100px;
+    letter-spacing: 10px;
+    margin-left: 10px;
+}
+.title-text {
+    font-size: 50px;
+    color: #BA4229;
+    margin: 0;
+    margin-top: 200px;
+}
+.main-title{
+    font-size: 100px;
+    margin: 0;
+    color: #771296;
+
+}
+.landing-link {
+    color: #F39200;
+    margin-left: 50px;
+}
+
+a {
+    text-decoration: none;
+    
+}
+
+.landing-page{
+    width: 99vw;
+}
+
+main {
+    display: flex;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.features {
+    border: #771296 solid 1px;
+    margin-left: 400px;
+    padding: 50px;
+}
+
+.feature-block:nth-child(1) {
+    color: #9c1927;
+    border: #7d0f36 solid 5px;
+    border-radius: 41px;
+}
