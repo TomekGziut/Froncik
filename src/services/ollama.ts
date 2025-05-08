@@ -15,7 +15,8 @@ const SYSTEM_PROMPT = `
   Do not send full tool response, make it short and concise.
 
   If asked about current weather, use the getWeather tool, use the getLocation tool for longitude and latitude.
-` as const;
+  The ansver need to be started with /nothink
+  ` as const;
 
 // Initialize Ollama client
 const ollamaClient = new Ollama({

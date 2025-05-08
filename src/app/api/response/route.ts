@@ -1,33 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { generateResponse } from '@/services/ollama';  // Importujemy funkcję generateResponse
+import { generateResponse } from '@/services/ollama'; // Importujemy funkcję generateResponse
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   console.log('Dane odebrane:', body);
 
-  // Zakładając, że body zawiera `message` i `history`
   const { message, history } = body;
 
-  // Wywołanie funkcji generateResponse, która zwraca wygenerowaną odpowiedź
+  // Wywołanie funkcji generateResponse, która zwraca odpowiedź od modelu
   const generatedValue = await generateResponse(message, history);
   console.log('Wygenerowana odpowiedź:', generatedValue);
 
-  // Przygotowanie danych do wysłania na localhost:5000/generate-response
+  // Wyciągamy content z odpowiedzi modelu
+  let assistantMessage = generatedValue?.messages?.[0]?.content || 'Brak odpowiedzi.';
+
+  // Usuwamy tagi <think>...</think> i białe znaki
+  assistantMessage = assistantMessage.replace(/<think>\s*<\/think>\s*/gi, '').trim();
+
+  // Przesyłamy oczyszczoną odpowiedź dalej do lokalnego API
   const response = await fetch('http://localhost:5000/generate-response', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ value: generatedValue }),  // Przesyłamy wygenerowaną wartość jako 'value'
+    body: JSON.stringify({ value: assistantMessage }),
   });
 
-  // Sprawdzamy, czy odpowiedź z zewnętrznego serwera jest pozytywna
+  // Obsługa odpowiedzi z serwera
   if (response.ok) {
     const responseBody = await response.json();
     console.log('Odpowiedź z localhost:5000/generate-response:', responseBody);
 
     return NextResponse.json({
-      message: `Otrzymano wygenerowaną wartość: ${generatedValue}, odpowiedź z serwera: ${responseBody.message}`,
+      message: `Otrzymano odpowiedź: ${assistantMessage}, odpowiedź z serwera: ${responseBody.message}`,
     });
   } else {
     console.error('Błąd w wywołaniu API:', response.statusText);
