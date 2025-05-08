@@ -1,0 +1,23 @@
+*{
+    font-family: "Lucida Console";
+}
+body {
+    margin: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.desc{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    flex-wrap: wrap;
+    width: 1300px;
+    font-size: 18px; 
+}
+.nas-head{
+    font-size: 22px;
+}
+.main-page:hover{
+    cursor: pointer;
+}
