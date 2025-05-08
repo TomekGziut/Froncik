@@ -1,44 +1,47 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
-const mysql = require('mysql2');
+const express = require("express");
+const { OpenAI } = require("openai");
+const cors = require("cors");
 
-const app = express();
-const PORT = 5000;
+const app = express(); // Utwórz instancję aplikacji Express
+const port = 5000;
 
-// Middleware
-app.use(cors());
-app.use(bodyParser.json());
+const baseURL = "https://api.aimlapi.com/v1";
+const apiKey = "13996f61baa64505b25f4e0dfd8313a0";
 
-// Połączenie z bazą danych
-const db = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: '', // Podaj swoje hasło do MySQL
-  database: 'codecamp',
+const api = new OpenAI({
+  apiKey,
+  baseURL,
 });
 
-db.connect((err) => {
-  if (err) {
-    console.error('Błąd połączenia z bazą danych:', err);
-    return;
+app.use(cors()); // Teraz możesz użyć cors
+app.use(express.json());
+
+app.post("/api/ask", async (req, res) => {
+  const { userPrompt } = req.body;
+
+  if (!userPrompt) {
+    return res.status(400).json({ error: "User prompt is required" });
   }
-  console.log('Połączono z bazą danych MySQL');
+
+  try {
+    const completion = await api.chat.completions.create({
+      model: "gpt-4o",
+      messages: [
+        { role: "system", content: "you answer questions, you give only the answer, no explanation" },
+        { role: "user", content: userPrompt },
+      ],
+      temperature: 0.7,
+      max_tokens: 256,
+    });
+
+    const response = completion.choices[0].message.content;
+    res.json({ response });
+  } catch (error) {
+    console.error("Error:", error);
+    res.status(500).json({ error: "Failed to fetch response from OpenAI" });
+  }
 });
 
-// Importowanie tras
-const userRoutes = require('./routes/users');
-const courseRoutes = require('./routes/courses');
-const assignmentRoutes = require('./routes/assignments');
-const additionalRoutes = require('./routes/additional');
-
-// Używanie tras
-app.use('/api/users', userRoutes);
-app.use('/api/courses', courseRoutes);
-app.use('/api/assignments', assignmentRoutes);
-app.use('/api/additional', additionalRoutes);
-
-// Start serwera
-app.listen(PORT, () => {
-  console.log(`Serwer działa na porcie ${PORT}`);
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
 });
