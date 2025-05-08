@@ -29,7 +29,8 @@ const About: React.FC = () => {
         <h1>O nas</h1>
         </header>
         <main className='desc'>
-          <p><strong>AIMatur</strong> to innowacyjna platforma edukacyjna, która łączy nowoczesną technologię sztucznej inteligencji z potrzebami uczniów przygotowujących się do matury.</p>
+          <p><strong>AIMatur</strong> to innowacyjna platforma edukacyjna, która łączy nowoczesną technologię sztucznej inteligencji z potrzebami
+           uczniów przygotowujących się do matury.</p>
           <p>Naszym celem jest maksymalne uproszczenie nauki i zwiększenie jej efektywności poprzez personalizowane podejście.</p>
           <p>Dzięki AIMatur:</p>
           <ul>
