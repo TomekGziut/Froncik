@@ -13,9 +13,10 @@ body {
     background-color: #b1b0bd;
     flex-wrap: wrap;
     width: 1450px;
-    font-size: 20px; 
+    font-size: 18px; 
     word-spacing: -1px;
     color: #771296;
+    margin-right: 20px;
 }
 .nas-head{
     color: #771296;
