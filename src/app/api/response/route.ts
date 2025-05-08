@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
   assistantMessage = assistantMessage.replace(/<think>\s*<\/think>\s*/gi, '').trim();
 
   // Przesyłamy oczyszczoną odpowiedź dalej do lokalnego API
-  const response = await fetch('http://localhost:5000/generate-response', {
+  const response = await fetch('http://localhost:5173//generate-response', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
