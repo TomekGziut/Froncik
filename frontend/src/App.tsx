@@ -3,6 +3,7 @@ import LandingPage from './pages/LandingPage'
 import About from './pages/About'
 import Register from './pages/Register'
 import Login from './pages/Login'
+import AIMatur from './pages/AIMatur'
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
         <Route path="/about" element={<About />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/aimatur" element={<AIMatur />} />
       </Routes>
     </div>
   )
